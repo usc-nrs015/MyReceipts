@@ -2,13 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.myreceipts">
 
-    <uses-feature android:name="android.hardware.camera"
-        android:required="false"
-        />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,22 +22,32 @@
         <activity android:name=".ReceiptListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ReceiptActivity"
-            android:parentActivityName=".ReceiptListActivity">
-        </activity>
+            android:parentActivityName=".ReceiptListActivity" />
+
         <provider
-            android:authorities="com.bignerdranch.android.myreceipts.fileprovider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bignerdranch.android.myreceipts.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/files"/>
+                android:resource="@xml/files" />
         </provider>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCpOCxsPbl-tXlRIV4nzhnRibIYymdznfY" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".HelpWebPage"></activity>
     </application>
 
 </manifest>

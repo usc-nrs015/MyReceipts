@@ -151,5 +151,12 @@
         android:layout_height="wrap_content"
         android:text="@string/receipt_report_text" />
 
+    <Button
+        android:id="@+id/delete_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Receipt"
+        android:textColor="@android:color/holo_red_dark" />
+
 
 </LinearLayout>

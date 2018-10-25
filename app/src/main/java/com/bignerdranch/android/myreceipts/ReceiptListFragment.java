@@ -3,7 +3,6 @@ package com.bignerdranch.android.myreceipts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,11 +17,8 @@ import java.util.List;
 
 public class ReceiptListFragment extends Fragment {
 
-    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
-
     private RecyclerView mReceiptRecyclerView;
     private ReceiptAdapter mAdapter;
-    private boolean mSubtitleVisible;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,10 +32,6 @@ public class ReceiptListFragment extends Fragment {
 
         mReceiptRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
         mReceiptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        if (savedInstanceState != null) {
-            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
-        }
 
         updateUI();
 
@@ -56,13 +48,6 @@ public class ReceiptListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_receipt_list, menu);
-
-        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
-        if (mSubtitleVisible) {
-            subtitleItem.setTitle(R.string.hide_subtitle);
-        } else {
-            subtitleItem.setTitle(R.string.show_subtitle);
-        }
     }
 
     @Override
@@ -74,27 +59,14 @@ public class ReceiptListFragment extends Fragment {
                 Intent intent = ReceiptActivity.newIntent(getActivity(), receipt.getId());
                 startActivity(intent);
                 return true;
-            case R.id.show_subtitle:
-                mSubtitleVisible = !mSubtitleVisible;
-                getActivity().invalidateOptionsMenu();
-                updateSubtitle();
+            case R.id.help_menu_button:
+                String url = "https://en.wikipedia.org/wiki/Receipt";
+                Intent i = HelpWebPage.newIntent(getActivity(), url);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void updateSubtitle() {
-        ReceiptLab receiptLab = ReceiptLab.get(getActivity());
-        int receiptCount = receiptLab.getReceipt().size();
-        String subtitle = getString(R.string.subtitle_format, receiptCount);
-
-        if (!mSubtitleVisible) {
-            subtitle = null;
-        }
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
     private void updateUI() {
@@ -108,15 +80,8 @@ public class ReceiptListFragment extends Fragment {
             mAdapter.setReceipts(receipts);
             mAdapter.notifyDataSetChanged();
         }
-
-        updateSubtitle();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
-    }
 
     private class ReceiptHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -143,7 +108,6 @@ public class ReceiptListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            //Toast.makeText(getActivity(), mReceipt.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
             Intent intent = ReceiptActivity.newIntent(getActivity(), mReceipt.getId());
             startActivity(intent);
         }

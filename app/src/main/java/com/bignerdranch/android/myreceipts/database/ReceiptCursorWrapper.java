@@ -20,16 +20,16 @@ public class ReceiptCursorWrapper extends CursorWrapper {
         long date = getLong(getColumnIndex(ReceiptTable.Cols.DATE));
         String shopName = getString(getColumnIndex(ReceiptTable.Cols.SHOP_NAME));
         String comment = getString(getColumnIndex(ReceiptTable.Cols.COMMENT));
-        double locationLat = getDouble(getColumnIndex(ReceiptTable.Cols.LOCATION_LAT));
-        double locationLon = getDouble(getColumnIndex(ReceiptTable.Cols.LOCATION_LON));
+        String locationLat = getString(getColumnIndex(ReceiptTable.Cols.LOCATION_LAT));
+        String locationLon = getString(getColumnIndex(ReceiptTable.Cols.LOCATION_LON));
 
         Receipt receipt = new Receipt(UUID.fromString(uuidString));
         receipt.setTitle(title);
         receipt.setDate(new Date(date));
         receipt.setShopName(shopName);
         receipt.setComment(comment);
-        receipt.setLocationLat(Double.toString(locationLat));
-        receipt.setLocationLon(Double.toString(locationLon));
+        receipt.setLocationLat(locationLat);
+        receipt.setLocationLon(locationLon);
 
         return receipt;
     }

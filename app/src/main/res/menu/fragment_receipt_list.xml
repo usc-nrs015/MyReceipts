@@ -7,7 +7,7 @@
         android:title="@string/new_receipt"
         app:showAsAction="ifRoom|withText" />
     <item
-        android:id="@+id/show_subtitle"
-        android:title="@string/show_subtitle"
+        android:id="@+id/help_menu_button"
+        android:title="@string/help_title"
         app:showAsAction="ifRoom" />
 </menu>

@@ -8,12 +8,10 @@ public class Receipt {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-    private boolean mSolved;
     private String mShopName;
     private String mComment;
     private String mLocationLat;
     private String mLocationLon;
-    //private String mSuspect;
 
     public Receipt() {
         this(UUID.randomUUID());
@@ -44,14 +42,6 @@ public class Receipt {
     public void setDate(Date date) {
         mDate = date;
     }
-
-    /*public boolean isSolved() {
-        return mSolved;
-    }
-
-    public void setSolved(boolean solved) {
-        mSolved = solved;
-    }*/
 
     public String getShopName() {
         return mShopName;
@@ -85,13 +75,6 @@ public class Receipt {
         mLocationLon = locationLon;
     }
 
-    /*public String getSuspect() {
-        return mSuspect;
-    }*/
-
-    /*public void setSuspect(String suspect) {
-        mSuspect = suspect;
-    }*/
 
     public String getPhotoFilename() {
         return "IMG_" + getId().toString() + ".jpg";
