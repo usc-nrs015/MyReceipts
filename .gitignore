@@ -9,5 +9,5 @@
 /captures
 .externalNativeBuild
 build/
-/.idea
+.idea/
 local.properties
