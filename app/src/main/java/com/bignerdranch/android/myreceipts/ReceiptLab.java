@@ -41,10 +41,10 @@ public class ReceiptLab {
 
     public void deleteReceipt(Receipt r) {
         String id = r.getId().toString();
-        mDatabase.delete(ReceiptTable.NAME, "UUID =?", new String[] {id});
+        mDatabase.delete(ReceiptTable.NAME, ReceiptTable.Cols.UUID + " = ?", new String[] {id});
     }
 
-    public List<Receipt> getReceipt() {
+    public List<Receipt> getReceipts() {
         List<Receipt> receipts = new ArrayList<>();
 
         ReceiptCursorWrapper cursor = queryReceipt(null, null);

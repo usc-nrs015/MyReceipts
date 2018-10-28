@@ -70,8 +70,8 @@ public class ReceiptListFragment extends Fragment {
     }
 
     private void updateUI() {
-        ReceiptLab crimeLab = ReceiptLab.get(getActivity());
-        List<Receipt> receipts = crimeLab.getReceipt();
+        ReceiptLab receiptLab = ReceiptLab.get(getActivity());
+        List<Receipt> receipts = receiptLab.getReceipts();
 
         if (mAdapter == null) {
             mAdapter = new ReceiptAdapter(receipts);

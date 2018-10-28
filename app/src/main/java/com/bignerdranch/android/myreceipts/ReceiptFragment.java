@@ -303,8 +303,8 @@ public class ReceiptFragment extends Fragment {
     }
 
     private void updateLocation() {
-        mLocationLat.setText(mReceipt.getLocationLat());
-        mLocationLon.setText(mReceipt.getLocationLon());
+        mLocationLat.setText(String.valueOf("Lat: " + mReceipt.getLocationLat()));
+        mLocationLon.setText(String.valueOf("Lon: " + mReceipt.getLocationLon()));
     }
 
     private String getReceiptReport() {
